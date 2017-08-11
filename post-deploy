@@ -4,6 +4,7 @@ set -eo pipefail; [[ $DOKKU_TRACE ]] && set -x
 APP="$1"
 IMAGE="$2"
 HOSTNAME=$(hostname -f)
+GIT_REV=cat $(cat "$DOKKU_ROOT/HEAD" | sed -r 's/ref:\s+//')
 
 if [[ -f "$DOKKU_ROOT/$APP/SLACK_URL" || -f "$DOKKU_ROOT/SLACK_URL" ]]; then
   echo "-----> Notifying Slack ..."
